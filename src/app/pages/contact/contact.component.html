@@ -1,0 +1,29 @@
+<section class="contact-layout">
+  <article class="contact-details">
+    <div class="page-brand">
+      <p class="tagline">Creating legacy through luxury homes.</p>
+    </div>
+    <p class="eyebrow">Contact Us</p>
+    <h1>Let Us Help You Move Forward</h1>
+    <p>
+      Whether you are buying your first home, upgrading, or investing, our Indore team is
+      available to guide your next step.
+    </p>
+
+    <ul>
+      <li><strong>Phone:</strong> 1111111111</li>
+      <li><strong>Office:</strong> Airport Road, Indore, MP</li>
+      <li><strong>Owner:</strong> Devnsh Makwana</li>
+    </ul>
+  </article>
+
+  <app-inquiry-form
+    title="Send A Message"
+    submitLabel="Send Message"
+    [loading]="sending"
+    [includeEmail]="true"
+    [includePhone]="true"
+    [includeMessage]="true"
+    (submitted)="submitContact($event)"
+  ></app-inquiry-form>
+</section>

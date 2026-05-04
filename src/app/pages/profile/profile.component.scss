@@ -1,0 +1,51 @@
+.profile-wrap {
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
+  background: linear-gradient(150deg, var(--surface-1), var(--surface-2));
+  padding: 1.45rem;
+}
+
+h1,
+h2 {
+  margin: 0;
+}
+
+.summary-card {
+  margin-top: 0.95rem;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-soft);
+  background: var(--surface-1);
+}
+
+.summary-card p {
+  margin: 0.35rem 0;
+  color: var(--text-muted);
+}
+
+.role {
+  display: inline-block;
+  margin-top: 0.4rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft);
+  color: var(--gold-200);
+  font-weight: 700;
+}
+
+.profile-form {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.actions button[mat-stroked-button] {
+  border-color: rgba(216, 162, 58, 0.55);
+  color: var(--gold-100) !important;
+}

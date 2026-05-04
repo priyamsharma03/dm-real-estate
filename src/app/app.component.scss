@@ -1,0 +1,28 @@
+:host {
+  display: block;
+}
+
+.app-shell {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  overflow-x: hidden;
+}
+
+.app-main {
+  width: 100%;
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 1.65rem 1rem 2.5rem;
+  overflow-x: hidden;
+}
+
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  backdrop-filter: blur(4px);
+  background: rgba(216, 162, 58, 0.2);
+  z-index: 1200;
+}

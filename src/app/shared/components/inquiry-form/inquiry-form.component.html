@@ -1,0 +1,33 @@
+<section class="inquiry-panel">
+  <h3>{{ title }}</h3>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Full Name</mat-label>
+      <input matInput type="text" formControlName="name" />
+      <mat-error *ngIf="form.controls.name.invalid">Please enter your name.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" *ngIf="includePhone">
+      <mat-label>Phone Number</mat-label>
+      <input matInput type="tel" formControlName="phone" />
+      <mat-error *ngIf="form.controls.phone.invalid">Enter a valid phone number.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" *ngIf="includeEmail">
+      <mat-label>Email Address</mat-label>
+      <input matInput type="email" formControlName="email" />
+      <mat-error *ngIf="form.controls.email.invalid">Enter a valid email address.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" *ngIf="includeMessage">
+      <mat-label>Message</mat-label>
+      <textarea matInput rows="4" formControlName="message"></textarea>
+      <mat-error *ngIf="form.controls.message.invalid">Please enter at least 8 characters.</mat-error>
+    </mat-form-field>
+
+    <button mat-flat-button type="submit" [disabled]="loading || form.invalid">
+      {{ loading ? 'Sending...' : submitLabel }}
+    </button>
+  </form>
+</section>

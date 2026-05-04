@@ -1,0 +1,51 @@
+<section class="profile-wrap" *ngIf="profile as user; else noProfile">
+  <header>
+    <p class="eyebrow">Account</p>
+    <h1>Your Profile</h1>
+  </header>
+
+  <article class="summary-card">
+    <h2>{{ user.name }}</h2>
+    <p>{{ user.email }}</p>
+    <p>{{ user.phone }}</p>
+    <span class="role">{{ user.role | titlecase }}</span>
+  </article>
+
+  <form class="profile-form" [formGroup]="profileForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Full Name</mat-label>
+      <input matInput formControlName="name" [readonly]="!isEditing" />
+      <mat-error *ngIf="profileForm.controls.name.invalid">Please enter a valid name.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" [readonly]="!isEditing" />
+      <mat-error *ngIf="profileForm.controls.email.invalid">Please enter a valid email.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Phone</mat-label>
+      <input matInput formControlName="phone" [readonly]="!isEditing" />
+      <mat-error *ngIf="profileForm.controls.phone.invalid">Please enter a valid phone number.</mat-error>
+    </mat-form-field>
+
+    <div class="actions" *ngIf="!isEditing">
+      <button mat-flat-button type="button" (click)="startEditing()">Edit Profile</button>
+    </div>
+
+    <div class="actions" *ngIf="isEditing">
+      <button mat-flat-button type="button" (click)="saveProfile()" [disabled]="isSaving">
+        {{ isSaving ? 'Saving...' : 'Save Changes' }}
+      </button>
+      <button mat-stroked-button type="button" (click)="cancelEditing()">Cancel</button>
+    </div>
+  </form>
+</section>
+
+<ng-template #noProfile>
+  <section class="profile-wrap">
+    <h2>No profile loaded.</h2>
+    <p>Please log in again to view your account details.</p>
+  </section>
+</ng-template>

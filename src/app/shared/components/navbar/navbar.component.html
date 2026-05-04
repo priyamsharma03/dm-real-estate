@@ -1,0 +1,52 @@
+<header class="navbar">
+  <a class="brand" routerLink="/" (click)="closeMobileMenu()">
+    <span class="brand-logo-wrap">
+      <img src="/assets/logo.png" alt="DM Real Estate Logo" class="brand-logo" />
+    </span>
+  </a>
+
+  <button
+    mat-icon-button
+    type="button"
+    class="mobile-toggle"
+    aria-label="Toggle navigation"
+    (click)="toggleMobileMenu()"
+  >
+    <mat-icon>{{ mobileMenuOpen ? 'close' : 'menu' }}</mat-icon>
+  </button>
+
+  <nav [ngClass]="{ open: mobileMenuOpen }">
+    <a
+      routerLink="/"
+      (click)="closeMobileMenu()"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Home
+    </a>
+    <a routerLink="/listings" routerLinkActive="active" (click)="closeMobileMenu()">Listings</a>
+    <a routerLink="/about" routerLinkActive="active" (click)="closeMobileMenu()">About</a>
+    <a routerLink="/contact" routerLinkActive="active" (click)="closeMobileMenu()">Contact</a>
+
+    <ng-container *ngIf="(isAuthenticated$ | async) === true; else loggedOutLinks">
+      <a routerLink="/profile" routerLinkActive="active" (click)="closeMobileMenu()">Profile</a>
+
+      <a
+        *ngIf="(currentUser$ | async)?.role === 'admin'"
+        routerLink="/admin"
+        routerLinkActive="active"
+        (click)="closeMobileMenu()"
+      >
+        Admin
+      </a>
+
+      <button mat-stroked-button type="button" class="auth-btn" (click)="logout()">Logout</button>
+    </ng-container>
+
+    <ng-template #loggedOutLinks>
+      <a class="auth-link" routerLink="/login" routerLinkActive="active" (click)="closeMobileMenu()">
+        Login
+      </a>
+    </ng-template>
+  </nav>
+</header>

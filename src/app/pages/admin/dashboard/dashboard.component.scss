@@ -1,0 +1,468 @@
+.admin-hero {
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  padding: 1.3rem 1.4rem;
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(216, 162, 58, 0.16), rgba(12, 12, 12, 0.5));
+  border: 1px solid rgba(216, 162, 58, 0.35);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+}
+
+.hero-copy h1 {
+  margin: 0.45rem 0 0.3rem;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+}
+
+.hero-copy p {
+  margin: 0;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-summary {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.summary-item {
+  padding: 0.9rem 1rem;
+  border-radius: 16px;
+  border: 1px solid var(--border-soft);
+  background: var(--surface-1);
+  display: grid;
+  gap: 0.2rem;
+}
+
+.summary-item span {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.summary-item strong {
+  font-size: 1.4rem;
+}
+
+.summary-item p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.summary-sub {
+  font-size: 0.85rem;
+}
+
+.admin-insights {
+  margin-top: 1.1rem;
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.insight-card {
+  padding: 1rem 1.1rem;
+  border-radius: 16px;
+  background: linear-gradient(140deg, rgba(216, 162, 58, 0.12), rgba(20, 20, 20, 0.25));
+  border: 1px solid rgba(216, 162, 58, 0.22);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+}
+
+.insight-card h3 {
+  margin: 0.2rem 0 0.3rem;
+  font-size: 1.6rem;
+}
+
+.insight-label {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.insight-meta {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.admin-layout {
+  margin-top: 1.2rem;
+  display: grid;
+  gap: 1.1rem;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: start;
+}
+
+mat-card {
+  padding: 1.4rem;
+  background: linear-gradient(150deg, var(--surface-1), var(--surface-2));
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.2);
+}
+
+h2,
+h3 {
+  margin: 0;
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.card-badge {
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  background: rgba(216, 162, 58, 0.18);
+  color: var(--gold-200);
+  border: 1px solid rgba(216, 162, 58, 0.4);
+}
+
+.panel-subtitle {
+  margin: 0.35rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.editor-form {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.form-grid {
+  display: grid;
+  gap: 0.7rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.form-grid .span-2 {
+  grid-column: 1 / -1;
+}
+
+.form-hints {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  padding: 0.8rem 0.9rem;
+  border-radius: 14px;
+  border: 1px solid var(--border-soft);
+  background: rgba(18, 18, 18, 0.5);
+}
+
+.form-hints div {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.form-hints span {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.form-hints strong {
+  font-size: 1rem;
+  color: var(--gold-200);
+}
+
+.inventory-toolbar {
+  margin-top: 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.inventory-toolbar .field {
+  flex: 1 1 220px;
+  min-width: 200px;
+}
+
+.inventory-scroll {
+  margin-top: 0.5rem;
+  display: grid;
+  gap: 0.8rem;
+  max-height: 560px;
+  overflow: auto;
+  padding-right: 0.35rem;
+}
+
+.inventory-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.inventory-scroll::-webkit-scrollbar-thumb {
+  background: rgba(216, 162, 58, 0.45);
+  border-radius: 999px;
+}
+
+.upload-area {
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.upload-status {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.upload-area input[type='file'] {
+  width: 100%;
+}
+
+.preview-grid {
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+}
+
+.preview-item {
+  position: relative;
+}
+
+.preview-item img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--border-soft);
+}
+
+.preview-item button {
+  position: absolute;
+  top: 0.1rem;
+  right: 0.1rem;
+  width: 28px;
+  height: 28px;
+  background: var(--surface-1);
+}
+
+.editor-actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.editor-actions button[mat-stroked-button] {
+  border-color: rgba(216, 162, 58, 0.55);
+  color: var(--gold-100) !important;
+}
+
+.inventory-item {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr) auto;
+  gap: 1rem;
+  padding: 0.9rem;
+  border-radius: 16px;
+  border: 1px solid rgba(216, 162, 58, 0.25);
+  background: linear-gradient(145deg, rgba(18, 18, 18, 0.7), rgba(18, 18, 18, 0.4));
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.inventory-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+  border-color: rgba(216, 162, 58, 0.45);
+}
+
+.inventory-media {
+  position: relative;
+}
+
+.inventory-media img {
+  width: 150px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--border-soft);
+}
+
+.status-chip,
+.type-chip {
+  position: absolute;
+  left: 0.5rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.status-chip {
+  top: 0.5rem;
+  background: rgba(216, 162, 58, 0.85);
+  color: #111;
+}
+
+.type-chip {
+  bottom: 0.5rem;
+  background: rgba(15, 15, 15, 0.7);
+  color: var(--text-muted);
+  border: 1px solid var(--border-soft);
+}
+
+.inventory-meta {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.meta-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.price-stack {
+  display: grid;
+  gap: 0.1rem;
+  text-align: right;
+}
+
+.inventory-meta .price {
+  margin: 0;
+  font-weight: 600;
+  color: var(--gold-200);
+}
+
+.price-sub {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.inventory-meta .location,
+.inventory-meta .summary {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.inventory-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.inventory-stats .stat {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 10px;
+  border: 1px solid var(--border-soft);
+  background: rgba(12, 12, 12, 0.5);
+}
+
+.inventory-stats span {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.inventory-stats strong {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+}
+
+.item-actions {
+  display: grid;
+  gap: 0.4rem;
+  align-content: center;
+}
+
+.inquiries-card {
+  grid-column: 1 / -1;
+}
+
+.inquiry-item {
+  margin-top: 0.9rem;
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+  border: 1px solid var(--border-soft);
+  background: var(--surface-1);
+  display: grid;
+  gap: 0.5rem;
+}
+
+.inquiry-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.inquiry-head h3 {
+  margin: 0;
+}
+
+.meta {
+  margin: 0.35rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.badge {
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  background: rgba(216, 162, 58, 0.18);
+  color: var(--gold-200);
+  border: 1px solid rgba(216, 162, 58, 0.4);
+}
+
+.inquiry-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 1.2rem;
+  color: var(--text-muted);
+}
+
+.inquiry-details strong {
+  color: var(--text-primary);
+}
+
+.message {
+  margin: 0;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+@media (max-width: 1100px) {
+  .admin-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .admin-hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .inventory-item {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .inventory-media img {
+    width: 100%;
+    height: 190px;
+  }
+
+  .item-actions {
+    grid-auto-flow: column;
+    justify-content: flex-start;
+  }
+}

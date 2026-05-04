@@ -1,0 +1,257 @@
+<section class="admin-hero">
+  <div class="hero-copy">
+    <p class="eyebrow">Admin Console</p>
+    <h1>Portfolio Command Center</h1>
+    <p>Curate listings, manage inventory, and respond to demand with precision.</p>
+  </div>
+  <div class="hero-summary">
+    <div class="summary-item">
+      <span>Visible listings</span>
+      <strong>{{ filteredProperties.length }}</strong>
+      <p>Matches current filters</p>
+    </div>
+    <div class="summary-item">
+      <span>Active filters</span>
+      <strong>{{ propertyTypeFilter === 'All' ? 'All types' : propertyTypeFilter }}</strong>
+      <p class="summary-sub" *ngIf="propertySearch">Search: "{{ propertySearch }}"</p>
+      <p class="summary-sub" *ngIf="!propertySearch">Search: All listings</p>
+    </div>
+  </div>
+</section>
+
+<section class="admin-insights">
+  <article class="insight-card">
+    <p class="insight-label">Total Listings</p>
+    <h3>{{ properties.length }}</h3>
+    <p class="insight-meta">{{ activeLocationsCount }} locations covered</p>
+  </article>
+  <article class="insight-card">
+    <p class="insight-label">Featured Homes</p>
+    <h3>{{ featuredCount }}</h3>
+    <p class="insight-meta">Spotlight inventory</p>
+  </article>
+  <article class="insight-card">
+    <p class="insight-label">Average Price</p>
+    <h3>{{ averagePrice | currency:'INR':'symbol':'1.0-0' }}</h3>
+    <p class="insight-meta">Across active listings</p>
+  </article>
+  <article class="insight-card">
+    <p class="insight-label">Inbound Leads</p>
+    <h3>{{ inquiries.length }}</h3>
+    <p class="insight-meta">Latest demand signals</p>
+  </article>
+</section>
+
+<div class="admin-layout">
+  <mat-card class="editor-card">
+    <header class="card-head">
+      <div>
+        <p class="eyebrow">Listing Editor</p>
+        <h2>{{ editingPropertyId ? 'Edit Property' : 'Add New Property' }}</h2>
+        <p class="panel-subtitle">Keep listings premium and consistent.</p>
+      </div>
+      <span class="card-badge" *ngIf="editingPropertyId">Editing</span>
+    </header>
+
+    <form [formGroup]="propertyForm" class="editor-form">
+      <div class="form-grid">
+        <mat-form-field appearance="outline" class="span-2">
+          <mat-label>Property Title</mat-label>
+          <input matInput formControlName="title" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Property Type</mat-label>
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let type of propertyTypes" [value]="type">
+              {{ type }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Price (INR)</mat-label>
+          <input matInput type="number" formControlName="price" min="1" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Width (ft)</mat-label>
+          <input matInput type="number" formControlName="width" min="1" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Length (ft)</mat-label>
+          <input matInput type="number" formControlName="length" min="1" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="span-2">
+          <mat-label>Location</mat-label>
+          <input matInput formControlName="location" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="span-2">
+          <mat-label>Short Description</mat-label>
+          <textarea matInput rows="2" formControlName="shortDescription"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="span-2">
+          <mat-label>Full Description</mat-label>
+          <textarea matInput rows="3" formControlName="description"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="span-2">
+          <mat-label>Amenities (comma separated)</mat-label>
+          <input matInput formControlName="amenities" />
+        </mat-form-field>
+      </div>
+
+      <div class="form-hints" *ngIf="computedArea">
+        <div>
+          <span>Area</span>
+          <strong>{{ computedArea | number:'1.0-2' }} sq ft</strong>
+        </div>
+        <div *ngIf="computedPricePerSqFt">
+          <span>Price / sq ft</span>
+          <strong>{{ computedPricePerSqFt | currency:'INR':'symbol':'1.0-0' }}</strong>
+        </div>
+      </div>
+
+      <mat-checkbox formControlName="featured">Mark as featured</mat-checkbox>
+
+      <label class="upload-area">
+        <span>Upload Property Images</span>
+        <input
+          type="file"
+          multiple
+          accept="image/*"
+          (change)="onImagesSelected($event)"
+          [disabled]="isUploadingImages"
+        />
+        <span class="upload-status" *ngIf="isUploadingImages">Uploading images...</span>
+      </label>
+
+      <div class="preview-grid" *ngIf="previewImages.length">
+        <div class="preview-item" *ngFor="let image of previewImages; let i = index">
+          <img [src]="image" alt="Property preview image" loading="lazy" />
+          <button mat-icon-button type="button" (click)="removePreview(i)" aria-label="Remove image">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="editor-actions">
+        <button mat-flat-button type="button" (click)="saveProperty()">
+          {{ editingPropertyId ? 'Update Property' : 'Add Property' }}
+        </button>
+        <button mat-stroked-button type="button" (click)="resetEditor()">Clear</button>
+      </div>
+    </form>
+  </mat-card>
+
+  <mat-card class="inventory-card">
+    <header class="card-head">
+      <div>
+        <p class="eyebrow">Live Inventory</p>
+        <h2>Current Listings</h2>
+        <p class="panel-subtitle">
+          Showing {{ filteredProperties.length }} of {{ properties.length }} properties
+        </p>
+      </div>
+    </header>
+
+    <div class="inventory-toolbar">
+      <mat-form-field appearance="outline" class="field">
+        <mat-label>Search by title or location</mat-label>
+        <input matInput [(ngModel)]="propertySearch" placeholder="Search listings" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="field">
+        <mat-label>Property type</mat-label>
+        <mat-select [(ngModel)]="propertyTypeFilter">
+          <mat-option value="All">All types</mat-option>
+          <mat-option *ngFor="let type of propertyTypes" [value]="type">
+            {{ type }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="inventory-scroll" *ngIf="filteredProperties.length">
+      <article class="inventory-item" *ngFor="let property of filteredProperties">
+        <div class="inventory-media">
+          <img [src]="property.images[0]" [alt]="property.title" loading="lazy" />
+          <span class="status-chip" *ngIf="property.featured">Featured</span>
+          <span class="type-chip">{{ property.type }}</span>
+        </div>
+
+        <div class="inventory-meta">
+          <div class="meta-head">
+            <h3>{{ property.title }}</h3>
+            <div class="price-stack">
+              <p class="price">{{ property.price | currency:'INR':'symbol':'1.0-0' }}</p>
+              <p class="price-sub" *ngIf="getPropertyPricePerSqFt(property)">
+                {{ getPropertyPricePerSqFt(property) | currency:'INR':'symbol':'1.0-0' }} / sq ft
+              </p>
+            </div>
+          </div>
+          <p class="location">{{ property.location }}</p>
+          <p class="summary">{{ property.shortDescription }}</p>
+          <div class="inventory-stats">
+            <div class="stat" *ngIf="property.width && property.length">
+              <span>Size</span>
+              <strong>{{ property.width | number:'1.0-0' }} x {{ property.length | number:'1.0-0' }} ft</strong>
+            </div>
+            <div class="stat" *ngIf="getPropertyArea(property)">
+              <span>Area</span>
+              <strong>{{ getPropertyArea(property) | number:'1.0-0' }} sq ft</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-actions">
+          <button mat-button type="button" (click)="startEdit(property)">Edit</button>
+          <button mat-button type="button" color="warn" (click)="confirmDelete(property)">
+            Delete
+          </button>
+        </div>
+      </article>
+    </div>
+
+    <p class="empty" *ngIf="!filteredProperties.length">
+      {{ properties.length ? 'No properties match your current filters.' : 'No properties available yet.' }}
+    </p>
+  </mat-card>
+
+  <mat-card class="inquiries-card">
+    <header class="card-head">
+      <div>
+        <p class="eyebrow">Leads</p>
+        <h2>Recent Inquiries</h2>
+        <p class="panel-subtitle">{{ inquiries.length }} total inquiries</p>
+      </div>
+    </header>
+
+    <article class="inquiry-item" *ngFor="let inquiry of inquiries">
+      <div class="inquiry-head">
+        <div>
+          <h3>{{ inquiry.name }}</h3>
+          <p class="meta">
+            {{ inquiry.createdAt | date: 'medium' }}
+            <span *ngIf="inquiry.source">· {{ inquiry.source }}</span>
+          </p>
+        </div>
+        <span class="badge" *ngIf="inquiry.propertyTitle">{{ inquiry.propertyTitle }}</span>
+      </div>
+
+      <div class="inquiry-details">
+        <p *ngIf="inquiry.email"><strong>Email:</strong> {{ inquiry.email }}</p>
+        <p *ngIf="inquiry.phone"><strong>Phone:</strong> {{ inquiry.phone }}</p>
+        <p *ngIf="inquiry.propertyId"><strong>Property ID:</strong> {{ inquiry.propertyId }}</p>
+      </div>
+
+      <p class="message" *ngIf="inquiry.message">{{ inquiry.message }}</p>
+    </article>
+
+    <p class="empty" *ngIf="!inquiries.length">No inquiries submitted yet.</p>
+  </mat-card>
+</div>

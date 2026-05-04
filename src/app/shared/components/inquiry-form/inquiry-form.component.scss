@@ -1,0 +1,29 @@
+.inquiry-panel {
+  padding: 1.2rem;
+  border-radius: 16px;
+  border: 1px solid var(--border-soft);
+  background:
+    linear-gradient(130deg, var(--surface-1), var(--surface-2)),
+    radial-gradient(circle at right top, rgba(216, 162, 58, 0.12), transparent 55%);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.45);
+}
+
+h3 {
+  margin: 0 0 1rem;
+  font-family: var(--font-title);
+  color: var(--text-primary);
+}
+
+form {
+  display: grid;
+  gap: 0.8rem;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+button {
+  justify-self: start;
+  min-width: 148px;
+}

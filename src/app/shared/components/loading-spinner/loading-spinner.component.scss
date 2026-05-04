@@ -1,0 +1,11 @@
+.spinner-wrap {
+  display: grid;
+  justify-items: center;
+  gap: 0.85rem;
+  text-align: center;
+}
+
+p {
+  margin: 0;
+  color: var(--text-muted);
+}

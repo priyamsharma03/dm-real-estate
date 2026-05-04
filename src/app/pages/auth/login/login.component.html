@@ -1,0 +1,42 @@
+<section class="login-page">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Sign In</mat-card-title>
+      <mat-card-subtitle>Access your DM Real Estate account</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" />
+          <mat-error *ngIf="loginForm.controls.email.invalid">Enter a valid email.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" />
+          <mat-error *ngIf="loginForm.controls.password.invalid">Password is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Role</mat-label>
+          <mat-select formControlName="role">
+            <mat-option value="user">User</mat-option>
+            <mat-option value="admin">Admin</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button mat-flat-button type="submit" [disabled]="isSubmitting">
+          {{ isSubmitting ? 'Signing In...' : 'Login' }}
+        </button>
+      </form>
+
+      <div class="demo-box">
+        <h4>Demo Accounts</h4>
+        <p><strong>User:</strong> user&#64;dmestate.com / User&#64;123</p>
+        <p><strong>Admin:</strong> admin&#64;dmestate.com / Admin&#64;123</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</section>

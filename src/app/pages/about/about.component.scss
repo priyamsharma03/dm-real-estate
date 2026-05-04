@@ -1,0 +1,50 @@
+.about {
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
+  padding: 1.65rem;
+  background: linear-gradient(150deg, var(--surface-1), var(--surface-2));
+}
+
+.page-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  max-width: 320px;
+  margin-bottom: 0.6rem;
+}
+
+.page-brand img {
+  width: min(240px, 100%);
+  height: auto;
+}
+
+h1 {
+  margin: 0.45rem 0;
+}
+
+.lead {
+  margin: 0;
+  color: var(--text-muted);
+  max-width: 65ch;
+  line-height: 1.7;
+}
+
+.cards {
+  margin-top: 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+article {
+  border: 1px solid var(--border-soft);
+  border-radius: 14px;
+  padding: 1rem;
+  background: var(--surface-1);
+}
+
+article p {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.55;
+}

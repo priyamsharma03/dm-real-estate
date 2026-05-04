@@ -1,0 +1,71 @@
+<app-loading-spinner *ngIf="isLoading" message="Loading property details"></app-loading-spinner>
+
+<section class="detail-layout" *ngIf="!isLoading && property as item">
+  <a class="back-link" routerLink="/listings">&larr; Back to Listings</a>
+
+  <div class="gallery">
+    <img
+      class="hero-image"
+      [src]="selectedImage || item.images[0]"
+      [alt]="item.title"
+      loading="lazy"
+    />
+
+    <div class="thumbs">
+      <button
+        type="button"
+        *ngFor="let image of item.images"
+        [class.active]="image === selectedImage"
+        (click)="selectImage(image)"
+      >
+        <img [src]="image" [alt]="item.title + ' image'" loading="lazy" />
+      </button>
+    </div>
+  </div>
+
+  <article class="details">
+    <h1>{{ item.title }}</h1>
+    <p class="price">{{ item.price | currency:'INR':'symbol':'1.0-0' }}</p>
+    <p class="price-per" *ngIf="getPricePerSqFt(item)">
+      {{ getPricePerSqFt(item) | currency:'INR':'symbol':'1.0-0' }} / sq ft
+    </p>
+    <p class="location">{{ item.location }}</p>
+
+    <div class="metric-grid" *ngIf="item.width && item.length">
+      <div class="metric">
+        <span>Width</span>
+        <strong>{{ item.width | number:'1.0-2' }} ft</strong>
+      </div>
+      <div class="metric">
+        <span>Length</span>
+        <strong>{{ item.length | number:'1.0-2' }} ft</strong>
+      </div>
+      <div class="metric">
+        <span>Area</span>
+        <strong>{{ getArea(item) | number:'1.0-2' }} sq ft</strong>
+      </div>
+    </div>
+    <p class="description">{{ item.description }}</p>
+
+    <h3>Amenities</h3>
+    <div class="amenity-list">
+      <span *ngFor="let amenity of item.amenities">{{ amenity }}</span>
+    </div>
+
+    <app-inquiry-form
+      title="Request This Property"
+      submitLabel="Send Inquiry"
+      [includeEmail]="true"
+      [includePhone]="true"
+      [includeMessage]="true"
+      [loading]="sendingInquiry"
+      (submitted)="submitInquiry($event)"
+    ></app-inquiry-form>
+  </article>
+</section>
+
+<section class="empty-state" *ngIf="!isLoading && !property">
+  <h2>Property Not Found</h2>
+  <p>The property you are looking for is no longer available or may have been moved.</p>
+  <a mat-stroked-button routerLink="/listings">View All Listings</a>
+</section>

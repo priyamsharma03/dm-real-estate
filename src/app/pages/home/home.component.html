@@ -1,0 +1,124 @@
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-brand">
+      
+      <p class="tagline">Creating legacy through luxury homes.</p>
+    </div>
+    <p class="eyebrow">Indore, MP Luxury Living</p>
+    <h1><span class="company-name">DM Real Estate</span></h1>
+    <p>
+      Discover premium homes and investment opportunities across Indore with bespoke advisory
+      tailored for modern buyers and families.
+    </p>
+
+    <div class="actions">
+      <a mat-flat-button routerLink="/listings">Explore Collections</a>
+      <a mat-stroked-button routerLink="/contact">Book A Viewing</a>
+    </div>
+
+    <div class="mini-stats">
+      <article *ngFor="let metric of marketMetrics">
+        <h4>{{ metric.value }}</h4>
+        <p>{{ metric.label }}</p>
+      </article>
+    </div>
+  </div>
+
+  <div class="consultation-card">
+    <app-inquiry-form
+      title="Free Consultation"
+      submitLabel="Request Callback"
+      [loading]="sendingConsultation"
+      [includeEmail]="true"
+      [includePhone]="true"
+      [includeMessage]="true"
+      (submitted)="submitConsultation($event)"
+    ></app-inquiry-form>
+  </div>
+</section>
+
+<section class="market-strip">
+  <div class="ticker-track">
+    <span *ngFor="let metric of marketMetrics">
+      {{ metric.label }}: <strong>{{ metric.value }}</strong> · {{ metric.trend }}
+    </span>
+    <span *ngFor="let metric of marketMetrics">
+      {{ metric.label }}: <strong>{{ metric.value }}</strong> · {{ metric.trend }}
+    </span>
+  </div>
+</section>
+
+<section class="featured-section">
+  <header>
+    <p class="eyebrow">Curated Picks</p>
+    <h2>Featured Properties</h2>
+  </header>
+
+  <app-loading-spinner
+    *ngIf="loadingFeatured"
+    message="Loading featured properties"
+  ></app-loading-spinner>
+
+  <div class="featured-grid" *ngIf="!loadingFeatured && featuredProperties.length">
+    <app-property-card
+      *ngFor="let property of featuredProperties"
+      [property]="property"
+    ></app-property-card>
+  </div>
+
+  <p class="empty" *ngIf="!loadingFeatured && !featuredProperties.length">
+    Featured properties will appear here soon.
+  </p>
+</section>
+
+<section class="editorial-grid">
+  <article class="large">
+    <img
+      src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1400&q=80"
+      alt="Elegant modern living room"
+      loading="lazy"
+    />
+    <div>
+      <p class="eyebrow">Interior Inspiration</p>
+      <h3>Spaces Designed For Modern Comfort</h3>
+      <p>Thoughtfully curated interiors that blend timeless character with contemporary taste.</p>
+    </div>
+  </article>
+
+  <article>
+    <img
+      src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&w=1000&q=80"
+      alt="Beautiful city-facing residence"
+      loading="lazy"
+    />
+  </article>
+
+  <article>
+    <img
+      src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1000&q=80"
+      alt="Stylish neutral-toned kitchen"
+      loading="lazy"
+    />
+  </article>
+</section>
+
+<section class="testimonial-section">
+  <p class="eyebrow">Client Voices</p>
+  <h2>Trusted By Buyers & Investors</h2>
+
+  <article class="testimonial-card">
+    <p class="quote">“{{ testimonials[activeTestimonialIndex].quote }}”</p>
+    <h4>{{ testimonials[activeTestimonialIndex].name }}</h4>
+    <p class="role">{{ testimonials[activeTestimonialIndex].role }}</p>
+  </article>
+
+  <div class="dots">
+    <button
+      type="button"
+      *ngFor="let testimonial of testimonials; let i = index"
+      (click)="setTestimonial(i)"
+      [class.active]="i === activeTestimonialIndex"
+      [attr.aria-label]="'Show testimonial ' + (i + 1)"
+    ></button>
+  </div>
+</section>

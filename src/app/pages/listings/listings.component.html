@@ -1,0 +1,55 @@
+<section class="page-header">
+  <p class="eyebrow">Portfolio</p>
+  <h1>Property Listings</h1>
+  <p>Filter by budget and location to find your ideal property faster.</p>
+</section>
+
+<div class="type-tabs" role="tablist" aria-label="Filter by property type">
+  <button
+    type="button"
+    *ngFor="let type of propertyTypes"
+    [class.active]="selectedType === type"
+    (click)="setType(type)"
+  >
+    {{ type }}
+  </button>
+</div>
+
+<form class="filter-grid" [formGroup]="filterForm">
+  <mat-form-field appearance="outline">
+    <mat-label>Maximum Price (INR)</mat-label>
+    <input matInput type="number" formControlName="maxPrice" min="0" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Location</mat-label>
+    <mat-select formControlName="location">
+      <mat-option value="">All Locations</mat-option>
+      <mat-option *ngFor="let location of locations" [value]="location">{{ location }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Sort By Price</mat-label>
+    <mat-select formControlName="sort">
+      <mat-option value="">Default</mat-option>
+      <mat-option value="priceAsc">Low to High</mat-option>
+      <mat-option value="priceDesc">High to Low</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-button type="button" (click)="clearFilters()">Reset Filters</button>
+</form>
+
+<app-loading-spinner *ngIf="isLoading" message="Fetching properties"></app-loading-spinner>
+
+<section class="listings-grid" *ngIf="!isLoading && filteredProperties.length">
+  <app-property-card
+    *ngFor="let property of filteredProperties"
+    [property]="property"
+  ></app-property-card>
+</section>
+
+<p class="empty" *ngIf="!isLoading && !filteredProperties.length">
+  No properties match your current filters.
+</p>

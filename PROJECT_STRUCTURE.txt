@@ -1,0 +1,84 @@
+dm-real-estate/
+├─ .env
+├─ angular.json
+├─ package.json
+├─ README.md
+├─ tsconfig.json
+├─ tsconfig.app.json
+├─ tsconfig.spec.json
+├─ public/
+│  └─ _redirects (optional for Netlify)
+├─ backend/
+│  ├─ .venv/   (virtualenv, not committed)
+│  ├─ dm_real_estate.db   (sqlite db)
+│  ├─ requirements.txt
+│  ├─ main.py
+│  └─ app/
+│     ├─ main.py
+│     ├─ core/
+│     │  ├─ config.py
+│     │  └─ database.py
+│     ├─ data/
+│     │  ├─ seed_properties.py
+│     │  └─ mock_users.py
+│     ├─ models/
+│     │  ├─ property.py
+│     │  ├─ inquiry.py
+│     │  └─ user.py
+│     ├─ routers/
+│     │  ├─ __init__.py
+│     │  ├─ properties.py
+│     │  ├─ inquiries.py
+│     │  ├─ locations.py
+│     │  ├─ auth.py
+│     │  └─ uploads.py   (new: Cloudinary upload endpoint)
+│     └─ services/
+│        ├─ auth_service.py
+│        ├─ email_service.py
+│        └─ cloudinary_service.py   (new)
+├─ src/
+│  ├─ index.html
+│  ├─ main.ts
+│  ├─ styles.scss
+│  └─ app/
+│     ├─ app.component.ts/html/scss
+│     ├─ app.config.ts
+│     ├─ app.routes.ts
+│     ├─ core/
+│     │  ├─ guards/
+│     │  │  ├─ admin.guard.ts
+│     │  │  └─ auth.guard.ts
+│     │  ├─ interceptors/
+│     │  │  └─ auth.interceptor.ts  (added 401 handling)
+│     │  └─ services/
+│     │     ├─ auth.service.ts
+│     │     ├─ property.service.ts  (uploadImages added)
+│     │     ├─ inquiry.service.ts
+│     │     └─ user.service.ts
+│     ├─ models/
+│     │  ├─ property.model.ts  (width/length added)
+│     │  └─ others...
+│     ├─ pages/
+│     │  ├─ listings/
+│     │  │  └─ listings.component.html (listings view)
+│     │  ├─ property-detail/
+│     │  │  ├─ property-detail.component.ts
+│     │  │  └─ property-detail.component.html (shows width/length/area & per sq ft)
+│     │  └─ admin/
+│     │     └─ dashboard/
+│     │        ├─ dashboard.component.ts  (editor + upload handling)
+│     │        ├─ dashboard.component.html (redesigned admin UI)
+│     │        └─ dashboard.component.scss (redesigned styles)
+│     └─ shared/
+│        └─ components/
+│           ├─ confirm-dialog/
+│           ├─ inquiry-form/
+│           ├─ loading-spinner/
+│           └─ others...
+└─ PROJECT_STRUCTURE.txt   (this file)
+
+Notes:
+- Key backend changes: added `width`/`length` to property model, ALTER TABLE migration applied, Cloudinary upload endpoint and service added.
+- Frontend: admin editor now accepts width/length and uploads images to backend; property detail shows dimensions and price per sq ft.
+- Env config: put Cloudinary keys in root `.env` or `backend/.env` (loaded at startup).
+- For deployment: frontend to Netlify, backend to Render (free tiers) recommended; update API_BASE_URL in frontend services.

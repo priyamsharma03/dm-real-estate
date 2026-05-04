@@ -1,0 +1,21 @@
+<mat-card class="property-card">
+  <div class="media-wrap">
+    <img [src]="property.images[0]" [alt]="property.title" loading="lazy" />
+    <span class="featured" *ngIf="property.featured">Featured</span>
+  </div>
+
+  <mat-card-content>
+    <h3>{{ property.title }}</h3>
+    <p class="price">{{ property.price | currency:'INR':'symbol':'1.0-0' }}</p>
+    <span class="type-chip">{{ property.type }}</span>
+    <p class="location">
+      <mat-icon>location_on</mat-icon>
+      {{ property.location }}
+    </p>
+    <p class="description">{{ property.shortDescription }}</p>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <a mat-stroked-button [routerLink]="['/property', property.id]">View Details</a>
+  </mat-card-actions>
+</mat-card>
