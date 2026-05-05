@@ -3,10 +3,11 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, catchError, map, throwError } from 'rxjs';
 import { AuthSession, LoginCredentials } from '../../models/auth.model';
 import { UserProfile } from '../../models/user.model';
+import { environment } from '../../../environment/environment';
 
 const SESSION_KEY = 'dm-real-estate-auth-session';
 const TOKEN_KEY = 'dm-real-estate-token';
-const API_BASE_URL = 'http://localhost:8000/api';
+const API_BASE_URL = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'

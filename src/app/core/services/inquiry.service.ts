@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { InquiryRecord } from '../../models/inquiry.model';
 
-const API_BASE_URL = 'http://localhost:8000/api';
-
+import { environment } from '../../../environment/environment';
+const API_BASE_URL = environment.apiUrl;
 export interface InquiryPayload {
   name: string;
   email?: string;
