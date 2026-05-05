@@ -4,14 +4,16 @@ from uuid import uuid4
 from sqlalchemy import Column
 from sqlalchemy.dialects.sqlite import JSON as SQLiteJSON
 from sqlmodel import Field, SQLModel
+from typing import Optional
+
 
 
 class PropertyBase(SQLModel):
     title: str
     type: str
     price: int
-    width: float | None = None
-    length: float | None = None
+    width: Optional[float] = None
+    length: Optional[float] = None
     location: str
     shortDescription: str
     description: str
