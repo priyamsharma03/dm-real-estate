@@ -18,7 +18,7 @@ app = FastAPI(title="DM Real Estate API", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:4200", "http://127.0.0.1:4200"],
+    allow_origins=["http://localhost:4200", "http://127.0.0.1:4200","https://dm-realestate.netlify.app/"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
